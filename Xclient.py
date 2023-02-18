@@ -142,5 +142,5 @@ while True:
     count += 1
     sock.sendto(f"sending app client port {udpserver_port} {count}".encode(), (udpserver_ip, udpserver_port))
     print(f"sending test port {udpserver_port} {count}".encode())
-    message, addr = sock.recvfrom(1024)
-    print(f"recieving app client from {addr} message: {messsage.decode()}")
+    message, address = sock.recvfrom(1024)
+    print(f"recieving app client from {address} message: {messsage.decode()}")

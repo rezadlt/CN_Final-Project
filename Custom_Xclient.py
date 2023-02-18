@@ -46,7 +46,7 @@ def handle_udp_conn_recv(request):
 while True:
     request, address = Xclient_SERVER.recvfrom(1024)
     request = request.decode('ascii')
-    print(f'received UDP request from client {address}')
+    print(f'received UDP request from clients {address}')
     print(f'request:\t{request}\n')
 
     threading.Thread(target=handle_udp_conn_recv, args=(request,)).start()

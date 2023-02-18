@@ -80,6 +80,6 @@ count = 0
 
 while True:
     count += 1
-    message, addr = sock.recvfrom(1024)
-    print(f"App server recieved from {addr} message: {message}")
-    sock.sendto(f"app server from port {tcp_server_port} sends {count}".encode(), addr)
+    message, address = sock.recvfrom(1024)
+    print(f"App server recieved from {address} message: {message}")
+    sock.sendto(f"app server from port {tcp_server_port} sends {count}".encode(), address)
