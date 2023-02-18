@@ -173,5 +173,3 @@ def send_to_client(message, server_address, client_address):
 
 threading.Thread(target=receive_from_client).start()
 threading.Thread(target=receive_to_Xserver).start()
-
-
