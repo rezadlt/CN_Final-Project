@@ -70,6 +70,16 @@ def handle_tcp_conn_send(stcp_socket, rmt_udp_addr, udp_to_tcp_queue):
 def handle_udp_conn_recv(udp_socket, rmt_udp_addr, incom_udp_addr):
     if not udp_socket.getsockname()[1] in client.keys():
         q = Queue()
+        # if tcp_conn is None:
+        #     tcp_conn = socket.socket(family=socket.AF_INET, type=socket.SOCK_STREAM)
+        #     ssl_context = ssl.SSLContext(ssl.PROTOCOL_TLS_CLIENT)
+        #     ssl_context.load_verify_locations('ca.crt')
+        #     stcp_socket = ssl_context.wrap_socket(tcp_conn, server_hostname=tcp_server_addr[0])
+        #     stcp_socket.connect(tcp_server_addr)
+        #     mp.Process(target=handle_tcp_conn_send,
+        #                args=(stcp_socket, rmt_udp_addr, udp_to_tcp_queue)).start()
+        #     mp.Process(target=handle_tcp_conn_recv,
+        #                args=(stcp_socket, udp_socket, incom_udp_addr)).start()
         mp.Process(target=handle_tcp_conn_send,
                     args=(sock, rmt_udp_addr, q)).start()
 
