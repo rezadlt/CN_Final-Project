@@ -173,3 +173,24 @@ def send_to_client(message, server_address, client_address):
 
 threading.Thread(target=receive_from_client).start()
 threading.Thread(target=receive_to_Xserver).start()
+
+async def json():
+    with open("./Xclient_to_Xserver.json") as json_file: 
+        obj = json.load(json_file)
+        global xserver_port 
+        Xserver_Port = obj["Xserver_Port"]
+        global xserver_ip
+        Xserver_IP = obj["Xserver_IP"]
+        global client_port 
+        Xclient_Port = obj["Xclient_Port"]
+        global forward_address 
+        Xclient_IP = obj["Xclient_IP"]
+
+    loop = asyncio.get_running_loop()
+    await loop.create_datagram_endpoint(
+        lambda: main(),
+        local_address=('127.0.0.1', Xclient_Port)
+    )
+    print(f"Received: {Xclient_Port}")
+    while True:
+        await asyncio.sleep(1800)
