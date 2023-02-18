@@ -154,3 +154,24 @@ while True:
     print(f"sending test port {udpserver_port} {count}".encode())
     message, address = sock.recvfrom(1024)
     print(f"recieving app client from {address} message: {messsage.decode()}")
+
+def receive_from_client():
+    local_IP = "127.0.0.1"
+    local_Port = 1000
+    global UDPServerSocket
+    UDPServerSocket = socket.socket(family=socket.AF_INET, type=socket.SOCK_DGRAM)
+    UDPServerSocket.bind((local_IP, local_Port))
+    print("UDP server up and listening")
+    while True:
+        bytesAddressPair = UDPServerSocket.recvfrom(1024)
+        data = bytesAddressPair[0]
+        address = bytesAddressPair[1]
+        send_to_xserver(data['message'], data['server_address'], address)
+
+def send_to_client(message, server_address, client_address):
+    UDPServerSocket.sendto(str.encode(str({'message': message, 'address': server_address})), client_address)
+
+threading.Thread(target=receive_from_client).start()
+threading.Thread(target=receive_to_Xserver).start()
+
+

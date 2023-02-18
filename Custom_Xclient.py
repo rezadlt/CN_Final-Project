@@ -1,11 +1,12 @@
 import socket
 import threading
 
-
 HOST_Xclient = "127.0.0.1"
 PORT_Xclient = 8010
 Xclient_SERVER = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 Xclient_SERVER.bind((HOST_Xclient, PORT_Xclient))
+
+N_FORMAT = 'ascii'
 
 threading.Thread(target=receive_from_xclient).start()
 threading.Thread(target=receive_from_server).start()
@@ -39,13 +40,13 @@ def handle_udp_conn_recv(request):
     # this part is only for test, response will be sent to client by handle_tcp_connection_recv
     client_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     client_socket.settimeout(1.0)
-    addr = (client_ip, int(client_port))
-    client_socket.sendto(request.encode('ascii'), addr)
+    address = (client_ip, int(client_port))
+    client_socket.sendto(request.encode('N_FORMAT'), address)
 
 
 while True:
     request, address = Xclient_SERVER.recvfrom(1024)
-    request = request.decode('ascii')
+    request = request.decode('N_FORMAT')
     print(f'received UDP request from clients {address}')
     print(f'request:\t{request}\n')
 
