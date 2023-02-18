@@ -90,9 +90,9 @@ def handle_udp_conn_recv(udp_socket, rmt_udp_addr, incom_udp_addr):
         
     q = client[udp_socket.getsockname()[1]]
     while True:
-        segment, addr = udp_socket.recvfrom(1024)
-        address[incom_udp_addr] = addr
-        print(f'udp msg received: {segment} from {addr}')
+        segment, address = udp_socket.recvfrom(1024)
+        address[incom_udp_addr] = address
+        print(f'udp msg received: {segment} from {address}')
         q.put(segment)
 
 

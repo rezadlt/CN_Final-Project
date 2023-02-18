@@ -24,9 +24,9 @@ def parse_input_argument():
 def handle_tcp_conn_send(tcp_conn, udp_socket):
     print('hi')
     while True:
-        msg, addr = udp_socket.recvfrom(1024)
-        print(msg.decode())
-        tcp_conn.send(msg)
+        message, address = udp_socket.recvfrom(1024)
+        print(message.decode())
+        tcp_conn.send(message)
 
 if __name__ == "__main__":
     args = parse_input_argument()
