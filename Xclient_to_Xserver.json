@@ -1,0 +1,6 @@
+{
+    "Xclient_Port" : 1000,
+    "Xclient_IP" : "127.0.0.1",
+    "Xserver_Port" : 4444,
+    "Xserver_IP": "127.0.0.1"
+}

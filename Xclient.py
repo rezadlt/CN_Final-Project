@@ -177,14 +177,15 @@ threading.Thread(target=receive_to_Xserver).start()
 async def json():
     with open("./Xclient_to_Xserver.json") as json_file: 
         obj = json.load(json_file)
-        global xserver_port 
-        Xserver_Port = obj["Xserver_Port"]
-        global xserver_ip
-        Xserver_IP = obj["Xserver_IP"]
-        global client_port 
+        global Xclient_Port 
         Xclient_Port = obj["Xclient_Port"]
-        global forward_address 
+        global Xclient_IP 
         Xclient_IP = obj["Xclient_IP"]
+        global Xserver_Port 
+        Xserver_Port = obj["Xserver_Port"]
+        global Xserver_IP
+        Xserver_IP = obj["Xserver_IP"]
+
 
     loop = asyncio.get_running_loop()
     await loop.create_datagram_endpoint(
